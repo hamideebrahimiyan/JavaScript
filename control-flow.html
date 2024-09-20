@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JavaScript Control Flow with User Input</title>
+</head>
+<body>
+  <h1>Control Flow Example</h1>
+
+  <h2>Age Checker (if-else)</h2>
+  <p>Enter your age and click the button to check if you're an adult or a minor.</p>
+
+  <!-- Input field for user to enter age -->
+  <label for="userAge">Enter your age: </label>
+  <input type="number" id="userAge" placeholder="Enter age" />
+  <button onclick="checkAge()">Check Age</button>
+  <p id="ageResult"></p>
+
+  <h2>Day Checker (switch)</h2>
+  <p>Select a day to find out if it's the start, middle, or end of the week.</p>
+  <select id="daySelect">
+    <option value="Monday">Monday</option>
+    <option value="Wednesday">Wednesday</option>
+    <option value="Friday">Friday</option>
+  </select>
+  <button onclick="checkDay()">Check Day</button>
+  <p id="dayResult"></p>
+
+  <script>
+    // Function to check age using if-else statement
+    function checkAge() {
+      // Get the user's age from the input field
+      let age = document.getElementById("userAge").value;
+      let result;
+
+      if (age === "") {
+        result = "Please enter a valid age.";
+      } else {
+        age = parseInt(age);  // Convert input value to a number
+        if (age >= 18) {
+          result = "Adult";
+        } else {
+          result = "Minor";
+        }
+      }
+
+      // Output the result to the page
+      document.getElementById("ageResult").innerHTML = `Age: ${age} - ${result}`;
+    }
+
+    // Function to check day using switch statement
+    function checkDay() {
+      let day = document.getElementById("daySelect").value;
+      let result;
+
+      switch (day) {
+        case "Monday":
+          result = "Start of the week";
+          break;
+        case "Friday":
+          result = "End of the week";
+          break;
+        default:
+          result = "Midweek";
+      }
+
+      // Output the result to the page
+      document.getElementById("dayResult").innerHTML = `Day: ${day} - ${result}`;
+    }
+  </script>
+</body>
+</html>

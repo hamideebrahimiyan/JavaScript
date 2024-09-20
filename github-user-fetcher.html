@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub User Fetcher</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .user-info { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>Fetch GitHub User Data</h1>
+  <input type="text" id="username" placeholder="Enter GitHub username" />
+  <button onclick="fetchGitHubUser()">Fetch User</button>
+  <div class="user-info" id="userInfo"></div>
+  <p id="errorMessage" style="color: red;"></p>
+
+  <script>
+    function fetchGitHubUser() {
+      const username = document.getElementById("username").value;
+      const url = `https://api.github.com/users/${username}`;
+
+      // Fetch user data from GitHub API
+      fetch(url)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("User not found"); // Reject if response is not OK
+          }
+          return response.json(); // Parse JSON if response is OK
+        })
+        .then(data => {
+          // Display user information
+          const userInfo = document.getElementById("userInfo");
+          userInfo.innerHTML = `
+            <h2>${data.name}</h2>
+            <p>Username: ${data.login}</p>
+            <p>Followers: ${data.followers}</p>
+            <p>Public Repos: ${data.public_repos}</p>
+            <img src="${data.avatar_url}" alt="${data.name}" width="100" />
+          `;
+          document.getElementById("errorMessage").innerText = ""; // Clear error message
+        })
+        .catch(error => {
+          document.getElementById("userInfo").innerHTML = ""; // Clear user info
+          document.getElementById("errorMessage").innerText = error.message; // Display error message
+        });
+    }
+  </script>
+</body>
+</html>

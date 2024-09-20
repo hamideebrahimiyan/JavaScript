@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asynchronous Programming Example</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    .message { margin: 10px 0; }
+  </style>
+</head>
+<body>
+  <h1>Asynchronous Programming with Promises</h1>
+
+  <button onclick="fetchData()">Fetch Data</button>
+  <p class="message" id="resultMessage"></p>
+
+  <script>
+    // Function to simulate fetching data using a Promise
+    function fetchData() {
+      // Create a new Promise
+      let fetchDataPromise = new Promise((resolve, reject) => {
+        let success = true; // Simulate success or failure
+
+        // Simulate a delay to mimic data fetching
+        setTimeout(() => {
+          if (success) {
+            resolve("Data fetched successfully!"); // Resolve the promise
+          } else {
+            reject("Failed to fetch data."); // Reject the promise
+          }
+        }, 2000); // 2 seconds delay
+      });
+
+      // Handle the promise outcome
+      fetchDataPromise
+        .then(result => {
+          document.getElementById("resultMessage").innerText = result; // Display success message
+        })
+        .catch(error => {
+          document.getElementById("resultMessage").innerText = error; // Display error message
+        });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destructuring Example</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .example { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<h1>JavaScript Destructuring Example</h1>
+
+<div class="example">
+    <h2>Object Destructuring</h2>
+    <script>
+        const employee = { name: "Alice", position: "Developer", age: 25 };
+        const { name, position } = employee;
+        console.log(`Employee Name: ${name}, Position: ${position}`);
+        document.write(`<p>Employee Name: ${name}, Position: ${position}</p>`);
+    </script>
+</div>
+
+<div class="example">
+    <h2>Array Destructuring</h2>
+    <script>
+        const colors = ["red", "green", "blue"];
+        const [firstColor, secondColor] = colors;
+        console.log(`First Color: ${firstColor}, Second Color: ${secondColor}`);
+        document.write(`<p>First Color: ${firstColor}, Second Color: ${secondColor}</p>`);
+    </script>
+</div>
+
+<div class="example">
+    <h2>Nested Destructuring</h2>
+    <script>
+        const user = {
+            id: 1,
+            name: "John",
+            address: {
+                street: "123 Main St",
+                city: "Anytown"
+            }
+        };
+        const { name: userName, address: { city } } = user;
+        console.log(`${userName} lives in ${city}.`);
+        document.write(`<p>${userName} lives in ${city}.</p>`);
+    </script>
+</div>
+
+<div class="example">
+    <h2>Destructuring with Default Values</h2>
+    <script>
+        const product = {
+            id: 101,
+            name: "Laptop",
+            // discount is intentionally left out
+        };
+        const { name: productName, discount = 0 } = product; // discount defaults to 0
+        console.log(`Product: ${productName}, Discount: ${discount}`);
+        document.write(`<p>Product: ${productName}, Discount: ${discount}</p>`);
+    </script>
+</div>
+
+<div class="example">
+    <h2>Swapping Variables</h2>
+    <script>
+        let a = 1;
+        let b = 2;
+
+        // Swapping values using destructuring
+        [a, b] = [b, a];
+        console.log(`After swapping: a = ${a}, b = ${b}`);
+        document.write(`<p>After swapping: a = ${a}, b = ${b}</p>`);
+    </script>
+</div>
+
+</body>
+</html>
