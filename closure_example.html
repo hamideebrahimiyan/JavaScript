@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Closures Example</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        #countDisplay { margin-top: 10px; font-size: 18px; }
+    </style>
+</head>
+<body>
+
+<h1>Closure Counter Example</h1>
+<button id="incrementButton">Click me to increment</button>
+<div id="countDisplay">Count: 0</div>
+
+<script>
+    // Outer function to create a closure
+    function createCounter() {
+        let count = 0;  // count is private and can only be accessed by the inner function
+
+        function increment() {
+            count++;  // increase the count by 1
+            return count;
+        }
+
+        return increment;  // return the inner function
+    }
+
+    // Create a closure by calling createCounter
+    const counter = createCounter();
+
+    // Select the HTML elements
+    const button = document.getElementById('incrementButton');
+    const countDisplay = document.getElementById('countDisplay');
+
+    // Add an event listener to the button
+    button.addEventListener('click', function() {
+        const newCount = counter();  // each time the button is clicked, counter is called
+        countDisplay.textContent = `Count: ${newCount}`;  // update the displayed count
+    });
+</script>
+
+</body>
+</html>

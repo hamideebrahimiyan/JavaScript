@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prototype Chain Example</title>
+</head>
+<body>
+  <h1>Prototype Chain Example</h1>
+  <script>
+    // Constructor function
+    function Person(name, age) {
+      this.name = name;
+      this.age = age;
+    }
+
+    // Adding a method to the prototype
+    Person.prototype.greet = function() {
+      console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+    };
+
+    // Another constructor inheriting from Person
+    function Employee(name, age, jobTitle) {
+      Person.call(this, name, age);  // Inherit properties from Person
+      this.jobTitle = jobTitle;
+    }
+
+    // Inherit Person's prototype
+    Employee.prototype = Object.create(Person.prototype);
+
+    // Add a method to Employee's prototype
+    Employee.prototype.work = function() {
+      console.log(`${this.name} is working as a ${this.jobTitle}.`);
+    };
+
+    const emp1 = new Employee("Alice", 30, "Developer");
+    emp1.greet();  // Inherited method from Person: Outputs "Hello, my name is Alice and I am 30 years old."
+    emp1.work();   // Employee method: Outputs "Alice is working as a Developer."
+  </script>
+</body>
+</html>

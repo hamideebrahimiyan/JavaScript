@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Error Handling Example</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    #result { margin-top: 20px; color: red; }
+  </style>
+</head>
+<body>
+  <h1>JavaScript Error Handling</h1>
+
+  <button id="parseButton">Parse Invalid JSON</button>
+  <div id="result"></div>
+
+  <script>
+    // Event listener for the button
+    document.getElementById('parseButton').addEventListener('click', function() {
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = ""; // Clear any previous messages
+
+      try {
+        // Attempt to parse an invalid JSON string
+        let result = JSON.parse('{"name": "John"'); // Missing closing brace
+        resultDiv.innerHTML = "Parsing Successful: " + JSON.stringify(result);
+      } catch (error) {
+        // Handle the error if parsing fails
+        resultDiv.innerHTML = "An error occurred: " + error.message;
+      } finally {
+        // This code runs whether an error occurred or not
+        console.log("This always runs, regardless of error.");
+      }
+    });
+  </script>
+</body>
+</html>
