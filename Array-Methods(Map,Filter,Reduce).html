@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Map, Filter, Reduce</title>
+</head>
+<body>
+  <h1>JavaScript Array Methods: Map, Filter, Reduce</h1>
+  <script>
+    const numbers = [1, 2, 3, 4, 5];
+
+    // Map: Multiply each number by 2
+    const doubled = numbers.map(num => num * 2);
+    console.log("Doubled:", doubled); // Outputs: [2, 4, 6, 8, 10]
+
+    // Filter: Get numbers greater than 3
+    const filtered = numbers.filter(num => num > 3);
+    console.log("Filtered:", filtered); // Outputs: [4, 5]
+
+    // Reduce: Sum all numbers
+    const sum = numbers.reduce((acc, num) => acc + num, 0);
+    console.log("Sum:", sum); // Outputs: 15
+  </script>
+</body>
+</html>

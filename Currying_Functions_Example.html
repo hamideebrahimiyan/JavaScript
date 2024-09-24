@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currying Example</title>
+</head>
+<body>
+  <h1>Currying Example</h1>
+  <script>
+    // Currying function: takes one argument at a time
+    function multiply(a) {
+      return function(b) {
+        return function(c) {
+          return a * b * c;
+        };
+      };
+    }
+
+    // Partially applying the function
+    const multiplyByTwo = multiply(2);
+    const multiplyByTwoAndThree = multiplyByTwo(3);
+
+    console.log(multiplyByTwoAndThree(5)); // Outputs: 30 (2 * 3 * 5)
+
+    // Alternatively, applying all arguments at once:
+    console.log(multiply(2)(3)(4)); // Outputs: 24 (2 * 3 * 4)
+  </script>
+</body>
+</html>

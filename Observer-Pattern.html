@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MutationObserver Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #taskList {
+            margin-top: 20px;
+            list-style-type: none;
+            padding: 0;
+        }
+        .task {
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .task.done {
+            text-decoration: line-through;
+            background-color: #e0ffe0;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Task List</h1>
+<input type="text" id="taskInput" placeholder="Add a new task" />
+<button id="addTaskButton">Add Task</button>
+
+<ul id="taskList"></ul>
+
+<script>
+    // Function to create a new task element
+    function createTaskElement(task) {
+        const li = document.createElement('li');
+        li.className = 'task';
+        li.textContent = task;
+
+        // Add a checkbox for completing the task
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.addEventListener('change', () => {
+            li.classList.toggle('done', checkbox.checked);
+        });
+
+        li.appendChild(checkbox);
+        return li;
+    }
+
+    // Add task to the list
+    const addTaskButton = document.getElementById('addTaskButton');
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+
+    addTaskButton.addEventListener('click', () => {
+        const taskText = taskInput.value.trim();
+        if (taskText) {
+            const taskElement = createTaskElement(taskText);
+            taskList.appendChild(taskElement);
+            taskInput.value = ''; // Clear the input field
+        }
+    });
+
+    // MutationObserver to watch for changes in the task list
+    const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+            if (mutation.type === 'childList') {
+                console.log('Task list changed:');
+                mutation.addedNodes.forEach(node => {
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                        console.log(`Added task: ${node.textContent}`);
+                    }
+                });
+                mutation.removedNodes.forEach(node => {
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                        console.log(`Removed task: ${node.textContent}`);
+                    }
+                });
+            }
+        });
+    });
+
+    // Configure the observer to watch for child nodes
+    observer.observe(taskList, { childList: true });
+
+    // Example of removing a task after 5 seconds
+    setInterval(() => {
+        const tasks = taskList.getElementsByClassName('task');
+        if (tasks.length > 0) {
+            taskList.removeChild(tasks[0]); // Remove the first task
+        }
+    }, 5000);
+</script>
+
+</body>
+</html>

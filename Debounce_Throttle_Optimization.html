@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debouncing & Throttling Example</title>
+</head>
+<body>
+  <h1>Debouncing & Throttling Example</h1>
+
+  <!-- Debouncing Example: Search Input -->
+  <h2>Search with Debouncing</h2>
+  <input type="text" id="searchInput" placeholder="Type to search..." />
+  <div id="searchResult"></div>
+
+  <!-- Throttling Example: Window Resize -->
+  <h2>Resize with Throttling</h2>
+  <div id="resizeInfo">Resize the window to see the effect.</div>
+
+  <script>
+    // Debouncing Function
+    function debounce(func, delay) {
+      let timeout;
+      return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), delay);
+      };
+    }
+
+    // Throttling Function
+    function throttle(func, limit) {
+      let inThrottle;
+      return function(...args) {
+        if (!inThrottle) {
+          func.apply(this, args);
+          inThrottle = true;
+          setTimeout(() => inThrottle = false, limit);
+        }
+      };
+    }
+
+    // Debouncing Example: Search
+    const searchInput = document.getElementById('searchInput');
+    const searchResult = document.getElementById('searchResult');
+    const handleSearch = debounce(() => {
+      const searchTerm = searchInput.value;
+      searchResult.innerText = `Searching for "${searchTerm}"...`;
+    }, 300);
+
+    searchInput.addEventListener('input', handleSearch);
+
+    // Throttling Example: Window Resize
+    const resizeInfo = document.getElementById('resizeInfo');
+    const handleResize = throttle(() => {
+      resizeInfo.innerText = `Window resized to ${window.innerWidth}x${window.innerHeight}`;
+    }, 1000);
+
+    window.addEventListener('resize', handleResize);
+  </script>
+</body>
+</html>
